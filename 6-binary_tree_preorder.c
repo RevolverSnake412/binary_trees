@@ -6,7 +6,7 @@
  * @func: function to be used (accepts only values of nodes)
  *
  * Description:
- * This function goes through a binary tree a calls
+ * This function goes through a binary tree and calls
  * a function for each node until the whole tree has
  * being covered, it will terminate automatically at
  * the end. (function must only have one parameter).
