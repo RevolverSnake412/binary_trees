@@ -1,8 +1,6 @@
 #include "binary_trees.h"
 
-size_t binary_tree_height(const binary_tree_t *tree);
-size_t binary_tree_size(const binary_tree_t *tree);
-int _pow(int base, int exponent);
+int binary_tree_is_leaf(const binary_tree_t *node);
 
 /**
  * binary_tree_is_full - Checks if a binary tree is full.
@@ -12,91 +10,40 @@ int _pow(int base, int exponent);
 */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-	int expected_size = 0, i = 0;
-	int height, size;
+	int check = 1;
 
-	if (!tree)
+	if (tree->left)
+		check = binary_tree_is_full(tree->left);
+
+	if (check == 0)
 		return (0);
 
-	height = binary_tree_height(tree);
-	size = binary_tree_size(tree);
+	if (tree->right)
+		check = binary_tree_is_full(tree->right);
 
-	for (; i <= height; i++)
-		expected_size += _pow(2, i);
+	if (check == 0)
+		return (0);
 
-	if (expected_size == size)
+	if (binary_tree_is_leaf(tree) == 1
+	|| (tree->left && tree->right))
 		return (1);
+
 	return (0);
 }
 
 /**
- * binary_tree_height - measures the height of a binary tree.
- * @tree: the root node to start with.
+ * binary_tree_is_leaf - Verifies if a node is leaf.
+ * @node: the node in question.
  *
- * Return: The height of a root node on success, otherwise 0.
+ * Return: 0 if node is NULL or not a leaf, otherwise 1
 */
-size_t binary_tree_height(const binary_tree_t *tree)
+int binary_tree_is_leaf(const binary_tree_t *node)
 {
-	size_t lheight = 0, rheight = 0, max;
-
-	if (tree == NULL)
+	if (node == NULL)
 		return (0);
 
-	if (tree->left)
-	{
-		lheight = binary_tree_height(tree->left);
-		lheight++;
-	}
-
-	if (tree->right)
-	{
-		rheight = binary_tree_height(tree->right);
-		rheight++;
-	}
-
-	max = lheight;
-
-	if (rheight > max)
-		max = rheight;
-
-	return (max);
-}
-
-/**
- * binary_tree_size - Measures the size of a binary tree.
- * @tree: entry point of a binary tree considered as root node.
- *
- * Return: the size of the binary tree on success. Otherwise 0.
-*/
-size_t binary_tree_size(const binary_tree_t *tree)
-{
-	size_t size = 1;
-
-	if (!tree)
+	if (node->left == NULL && node->right == NULL)
+		return (1);
+	else
 		return (0);
-
-	if (tree->left)
-		size += binary_tree_size(tree->left);
-	if (tree->right)
-		size += binary_tree_size(tree->right);
-
-	return (size);
-}
-
-/**
- * _pow - Raises a base to an exponent.
- * @base: The base to raise.
- * @exponent: The exponent to raise to.
- *
- * Return: The base raised to the exponent.
-*/
-int _pow(int base, int exponent)
-{
-	int i = 1;
-	int sum = 1;
-
-	for (; i <= exponent; i++)
-		sum *= base;
-
-	return (sum);
 }
