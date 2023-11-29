@@ -23,8 +23,8 @@ int binary_tree_is_full(const binary_tree_t *tree)
 		expected_size += _pow(2, i);
 
 	if (expected_size != size)
-		return(0);
-	return(1);
+		return (0);
+	return (1);
 }
 
 /**
@@ -82,11 +82,11 @@ size_t binary_tree_size(const binary_tree_t *tree)
 }
 
 /**
- * pow - Raises a base to an exponent.
+ * _pow - Raises a base to an exponent.
  * @base: The base to raise.
  * @exponent: The exponent to raise to.
  *
- * Returns: The base raised to the exponent.
+ * Return: The base raised to the exponent.
 */
 int _pow(int base, int exponent)
 {
