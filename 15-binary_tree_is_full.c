@@ -13,18 +13,20 @@ int _pow(int base, int exponent);
 int binary_tree_is_full(const binary_tree_t *tree)
 {
 	int expected_size = 0, i = 0;
-	int height = binary_tree_height(tree);
-	int size = binary_tree_size(tree);
+	int height, size;
 
 	if (!tree)
 		return (0);
 
+	height = binary_tree_height(tree);
+	size = binary_tree_size(tree);
+
 	for (; i <= height; i++)
 		expected_size += _pow(2, i);
 
-	if (expected_size != size)
-		return (0);
-	return (1);
+	if (expected_size == size)
+		return (1);
+	return (0);
 }
 
 /**
