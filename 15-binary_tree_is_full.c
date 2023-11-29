@@ -10,7 +10,10 @@ int binary_tree_is_leaf(const binary_tree_t *node);
 */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-	int check = 1;
+	int check;
+
+	if (!tree)
+		return (0);
 
 	if (tree->left)
 		check = binary_tree_is_full(tree->left);
